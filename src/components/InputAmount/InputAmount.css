@@ -1,0 +1,65 @@
+:root {
+  --label-color: #8b9095;
+  --input-color: black;
+  --active-color: #1a73e8;
+}
+
+.input-wrapper {
+  width: 100%;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 100%;
+  color: var(--input-color);
+  padding-top: 20px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+}
+
+.input-wrapper label {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  pointer-events: none;
+  color: var(--label-color);
+  border-bottom: 1px solid var(--label-color);
+}
+
+.input-wrapper label::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  bottom: -1px;
+  border-bottom: 3px solid var(--active-color);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.content-name {
+  position: absolute;
+  left: 0px;
+  bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper input:focus + .label-name .content-name,
+.input-wrapper input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: var(--active-color);
+}
+
+.input-wrapper input:focus + .label-name::after,
+.input-wrapper input:valid + .label-name::after {
+  transform: translateX(0%);
+}

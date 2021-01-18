@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import CurrencyOptions from './CurrencyOptions';
+import ButtonConvert from './ButtonConvert/ButtonConvert';
+import CurrencyOptions from './CurrencyOptions/CurrencyOptions';
+import InputAmount from './InputAmount/InputAmount';
 
 export class Converter extends Component {
   constructor() {
     super();
     this.state = {
-      originalAmount: 1,
+      originalAmount: '',
       baseCurrency: 'NOK',
       toCurrency: 'USD',
       currencies: [],
@@ -30,7 +32,7 @@ export class Converter extends Component {
       });
   };
 
-  handleChange = (e) => {
+  handleAmountChange = (e) => {
     const { value, name } = e.target;
 
     this.setState({
@@ -68,39 +70,33 @@ export class Converter extends Component {
     } = this.state;
 
     const defaultText = 'Converted 💰 will appear here.';
-    const updatedText = `${originalAmount} ${baseCurrency} is equal to ${converted} ${toCurrency}`;
+    const updatedText = `${originalAmount} ${baseCurrency} = ${converted} ${toCurrency}`;
 
     return (
       <form onSubmit={this.handleConvert}>
-        <label htmlFor='amount'>Amount</label>
-        <input
-          type='number'
+        <InputAmount
           name='originalAmount'
           value={originalAmount}
           id='originalAmount'
-          onChange={this.handleChange}
+          handleAmountChange={this.handleAmountChange}
         />
-        <div>
-          <label htmlFor='from'>from</label>
-          <CurrencyOptions
-            currencyOptions={currencies}
-            onChangeCurrency={this.changeBaseCurrency}
-            name='baseCurrency'
-            id='from'
-            selectedCurrency={baseCurrency}
-          />
-        </div>
-        <div>
-          <label htmlFor='to'>to</label>
-          <CurrencyOptions
-            currencyOptions={currencies}
-            onChangeCurrency={this.changetoCurrency}
-            name='toCurrency'
-            id='to'
-            selectedCurrency={toCurrency}
-          />
-        </div>
-        <button>Exchange my money now!</button>
+        <CurrencyOptions
+          labelName='from'
+          currencyOptions={currencies}
+          onChangeCurrency={this.changeBaseCurrency}
+          name='baseCurrency'
+          id='from'
+          selectedCurrency={baseCurrency}
+        />
+        <CurrencyOptions
+          labelName='to'
+          currencyOptions={currencies}
+          onChangeCurrency={this.changetoCurrency}
+          name='toCurrency'
+          id='to'
+          selectedCurrency={toCurrency}
+        />
+        <ButtonConvert />
         <p>{isConverted ? updatedText : defaultText}</p>
       </form>
     );
