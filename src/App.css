@@ -1,24 +1,13 @@
 .App {
   background: #6ea3e7;
-  min-height: 100vh;
 }
 
 .App-content {
   margin: 0 auto;
-  max-width: 450px;
   text-align: center;
   box-shadow: 3px 5px 45px rgb(44, 44, 44);
-  padding: 60px;
+  padding: 2rem;
+  max-width: 24rem;
   background: white;
-  border-radius: 20px;
-}
-
-.App-header {
-  background-color: rgb(64 94 141 / 70%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin-bottom: 100px;
-  font-size: 26px;
+  border-radius: 0.4rem;
 }

@@ -1,14 +1,15 @@
 import './App.css';
 import Converter from './components/Converter';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1>Currency Converter</h1>
-      </header>
-      <div className='App-content'>
-        <Converter />
+      <Header />
+      <div className='container'>
+        <div className='App-content'>
+          <Converter />
+        </div>
       </div>
     </div>
   );

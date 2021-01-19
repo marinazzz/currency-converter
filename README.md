@@ -6,11 +6,11 @@ A web application used to convert currency according to the newest rates, built 
 
 ### UI Before conversion
 
-<img src="assets/currency-converter-default-marinazzz.PNG" alt="Screenshoot currency-converter-default-marinazzz"/>
+<img src="src/assets/currency-converter-default-marinazzz.PNG" alt="Screenshoot currency-converter-default-marinazzz"/>
 
 ### After conversion
 
-<img src="assets/currency-converter-converted-marinazzz.PNG" alt="Screenshoot currency-converter-convertedmarinazzz"/>
+<img src="src/assets/currency-converter-converted-marinazzz.PNG" alt="Screenshoot currency-converter-convertedmarinazzz"/>
 
 ## Installation and Setup Instructions
 

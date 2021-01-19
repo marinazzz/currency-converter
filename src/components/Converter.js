@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import ButtonConvert from './ButtonConvert/ButtonConvert';
 import CurrencyOptions from './CurrencyOptions/CurrencyOptions';
 import InputAmount from './InputAmount/InputAmount';
+import SwitchCurrencies from './SwitchCurrencies/SwitchCurrencies';
 
 export class Converter extends Component {
   constructor() {
     super();
     this.state = {
-      originalAmount: '',
+      amount: '',
       baseCurrency: 'NOK',
       toCurrency: 'USD',
       currencies: [],
       rates: [],
-      converted: '',
+      date: '',
       isConverted: false,
     };
   }
@@ -26,8 +27,9 @@ export class Converter extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({
-          rates: data['rates'],
-          currencies: [...Object.keys(data['rates']).sort()],
+          rates: data.rates,
+          date: data.date,
+          currencies: [...Object.keys(data.rates).sort()],
         });
       });
   };
@@ -41,64 +43,110 @@ export class Converter extends Component {
   };
 
   changeBaseCurrency = (e) => {
-    this.setState({ baseCurrency: e.target.value });
+    this.setState({
+      baseCurrency: e.target.value,
+    });
     this.fetchData(e.target.value);
   };
 
   changetoCurrency = (e) => {
     this.setState({ toCurrency: e.target.value });
-    this.fetchData(e.target.value);
+  };
+
+  calculate = () => {
+    const { amount, toCurrency, rates } = this.state;
+    const result = (rates[toCurrency] * amount).toFixed(3);
+    this.setState({
+      result,
+    });
   };
 
   handleConvert = (event) => {
     event.preventDefault();
-    const { originalAmount, toCurrency, rates } = this.state;
-    this.setState({
-      converted: (originalAmount * rates[toCurrency]).toFixed(3),
-      isConverted: true,
-    });
+    const { date } = this.state;
+    this.setState(
+      {
+        isConverted: true,
+        date,
+      },
+      this.calculate
+    );
+  };
+
+  handleSwitchCurrencies = () => {
+    const { baseCurrency, toCurrency } = this.state;
+    this.setState(
+      {
+        baseCurrency: toCurrency,
+        toCurrency: baseCurrency,
+      },
+      this.fetchData(this.state.toCurrency)
+    );
   };
 
   render() {
     const {
-      originalAmount,
+      amount,
       baseCurrency,
       toCurrency,
       currencies,
       isConverted,
-      converted,
+      result,
+      date,
     } = this.state;
 
-    const defaultText = 'Converted 💰 will appear here.';
-    const updatedText = `${originalAmount} ${baseCurrency} = ${converted} ${toCurrency}`;
+    const defaultText = <p>Converted 💰 will appear here.</p>;
+    const updatedText = (
+      <p className='App-text'>
+        {amount} {baseCurrency} = {result} {toCurrency}
+      </p>
+    );
+
+    const formatDate = (string) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(string).toLocaleDateString([], options);
+    };
+
+    const dateText = (
+      <p>
+        {' '}
+        last updated <time dateTime={date}>{formatDate(date)}</time>{' '}
+      </p>
+    );
 
     return (
-      <form onSubmit={this.handleConvert}>
-        <InputAmount
-          name='originalAmount'
-          value={originalAmount}
-          id='originalAmount'
-          handleAmountChange={this.handleAmountChange}
-        />
-        <CurrencyOptions
-          labelName='from'
-          currencyOptions={currencies}
-          onChangeCurrency={this.changeBaseCurrency}
-          name='baseCurrency'
-          id='from'
-          selectedCurrency={baseCurrency}
-        />
-        <CurrencyOptions
-          labelName='to'
-          currencyOptions={currencies}
-          onChangeCurrency={this.changetoCurrency}
-          name='toCurrency'
-          id='to'
-          selectedCurrency={toCurrency}
-        />
-        <ButtonConvert />
-        <p>{isConverted ? updatedText : defaultText}</p>
-      </form>
+      <>
+        <form onSubmit={this.handleConvert}>
+          <InputAmount
+            name='amount'
+            value={amount}
+            id='amount'
+            handleAmountChange={this.handleAmountChange}
+          />
+          <CurrencyOptions
+            labelName='from'
+            currencyOptions={currencies}
+            onChangeCurrency={this.changeBaseCurrency}
+            name='baseCurrency'
+            id='from'
+            selectedCurrency={baseCurrency}
+          />
+          <SwitchCurrencies
+            handleSwitchCurrencies={this.handleSwitchCurrencies}
+          />
+          <CurrencyOptions
+            labelName='to'
+            currencyOptions={currencies}
+            onChangeCurrency={this.changetoCurrency}
+            name='toCurrency'
+            id='to'
+            selectedCurrency={toCurrency}
+          />
+          <ButtonConvert />
+        </form>
+        {isConverted ? updatedText : defaultText}
+        {isConverted && dateText}
+      </>
     );
   }
 }

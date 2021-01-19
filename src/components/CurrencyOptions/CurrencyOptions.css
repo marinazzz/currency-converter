@@ -1,23 +1,22 @@
 .select-currency {
   background-color: #fff;
   color: #444;
-  font-size: 18px;
+  font-size: inherit;
   font-family: inherit;
   font-weight: 700;
   line-height: 2;
-  padding: 15px;
-  margin-top: 15px;
+  padding: 0.5rem 0.9rem;
+  margin-top: 1rem;
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid#8b9095;
+  border-radius: 0.4rem;
+  border: 0.06rem solid#8b9095;
   box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   outline-color: var(--active-color);
   background-repeat: no-repeat;
   background-position: right 10% bottom 50%, 0 0;
-  background-size: 10px auto, 100%;
+  background-size: 1rem auto, 100%;
   background-image: url(./arrow-icon.png);
 }
 
@@ -34,19 +33,19 @@
 }
 
 .select-wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 2rem;
 }
 
 .select-label {
   color: #444;
-  font-size: 20px;
+  font-size: inherit;
   font-family: inherit;
   font-weight: 500;
 }
 
 option {
   color: #444;
-  font-size: 18px;
+  font-size: inherit;
   font-family: inherit;
   font-weight: 600;
 }
