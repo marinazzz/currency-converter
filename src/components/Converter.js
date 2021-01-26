@@ -10,10 +10,11 @@ export class Converter extends Component {
     this.state = {
       amount: '',
       baseCurrency: 'NOK',
-      toCurrency: 'USD',
+      toCurrency: 'EUR',
       currencies: [],
       rates: [],
       date: '',
+      result: '',
       isConverted: false,
     };
   }
@@ -22,24 +23,30 @@ export class Converter extends Component {
   }
 
   fetchData = (base) => {
-    const api = `https://api.exchangeratesapi.io/latest?base=${base}`;
+    const api = `https://api.exchangerate.host/latest?base=${base}`;
     fetch(api)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({
-          rates: data.rates,
-          date: data.date,
-          currencies: [...Object.keys(data.rates).sort()],
-        });
+        this.setState(
+          {
+            rates: data.rates,
+            date: data.date,
+            currencies: [...Object.keys(data.rates).sort()],
+          },
+          this.calculate
+        );
       });
   };
 
   handleAmountChange = (e) => {
     const { value, name } = e.target;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.calculate
+    );
   };
 
   changeBaseCurrency = (e) => {
@@ -50,14 +57,19 @@ export class Converter extends Component {
   };
 
   changetoCurrency = (e) => {
-    this.setState({ toCurrency: e.target.value });
+    this.setState(
+      {
+        toCurrency: e.target.value,
+      },
+      this.calculate
+    );
   };
 
   calculate = () => {
     const { amount, toCurrency, rates } = this.state;
-    const result = (rates[toCurrency] * amount).toFixed(3);
+    const conversionResult = (rates[toCurrency] * amount).toFixed(3);
     this.setState({
-      result,
+      result: conversionResult,
     });
   };
 
@@ -75,13 +87,12 @@ export class Converter extends Component {
 
   handleSwitchCurrencies = () => {
     const { baseCurrency, toCurrency } = this.state;
-    this.setState(
-      {
-        baseCurrency: toCurrency,
-        toCurrency: baseCurrency,
-      },
-      this.fetchData(this.state.toCurrency)
-    );
+    this.setState({
+      baseCurrency: toCurrency,
+      toCurrency: baseCurrency,
+      result: this.state.result,
+    });
+    this.fetchData(this.state.toCurrency);
   };
 
   render() {

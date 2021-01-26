@@ -1,4 +1,3 @@
-import React from 'react';
 import './Header.css';
 const Header = () => {
   return (
@@ -7,5 +6,13 @@ const Header = () => {
     </header>
   );
 };
+
+//CSS in JS
+
+// const headerStyles = {
+//   color: 'white',
+//   fontSize: '36px',
+// };
+//<h1 style={headerStyles}>Currency Converter</h1>
 
 export default Header;

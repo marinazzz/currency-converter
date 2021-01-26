@@ -1,4 +1,3 @@
-import React from 'react';
 import './InputAmount.css';
 
 const InputAmount = ({ handleAmountChange, ...otherProps }) => {
