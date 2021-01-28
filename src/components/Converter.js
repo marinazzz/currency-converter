@@ -108,7 +108,7 @@ export class Converter extends Component {
 
     const defaultText = <p>Converted 💰 will appear here.</p>;
     const updatedText = (
-      <p className='App-text'>
+      <p className='app-text'>
         {amount} {baseCurrency} = {result} {toCurrency}
       </p>
     );

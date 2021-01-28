@@ -16,6 +16,7 @@ const CurrencyOptions = ({
         className='select-currency'
         value={selectedCurrency}
         onChange={onChangeCurrency}
+        id={labelName}
       >
         {currencyOptions.map((option) => (
           <option key={option} value={option}>

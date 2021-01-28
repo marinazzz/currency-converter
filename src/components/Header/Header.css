@@ -3,5 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+}
+
+.app-title {
+  color: var(--light-on-dark-bcg);
 }

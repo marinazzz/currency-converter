@@ -3,7 +3,11 @@ import './ButtonConvert.css';
 
 const ButtonConvert = (props) => {
   return (
-    <button onClick={props.handleConvert} className='btn-convert'>
+    <button
+      onClick={props.handleConvert}
+      className='btn-convert'
+      aria-label='Convert'
+    >
       Convert
     </button>
   );

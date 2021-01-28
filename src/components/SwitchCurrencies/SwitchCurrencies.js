@@ -5,9 +5,10 @@ const SwitchCurrencies = ({ handleSwitchCurrencies }) => {
   return (
     <img
       className='switch-icon'
-      alt='switch-arrow to change currency'
       src={arrow}
       onClick={handleSwitchCurrencies}
+      role='button'
+      aria-label='switch currency'
     ></img>
   );
 };

@@ -1,3 +1,11 @@
+:root {
+  --btn-bcg: #1a73e8;
+  --btn-color: #fff;
+  --btn-state: #6ea3e7;
+  --btn-shadow-sec: rgba(97, 128, 175, 0.73);
+  --btn-shadow-pr: rgba(0, 0, 0, 0.1);
+}
+
 .btn-convert {
   width: calc(100% / 3);
   min-width: 8rem;
@@ -7,21 +15,21 @@
   text-transform: uppercase;
   letter-spacing: 0.08rem;
   font-weight: 500;
-  color: #fff;
-  background-color: #1a73e8;
+  color: var(--btn-color);
+  background-color: var(--btn-bcg);
   border: none;
   border-radius: 2rem;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 15px var(--btn-shadow-pr);
   transition: all 0.3s ease 0s;
   cursor: pointer;
 }
 
 .btn-convert:hover {
-  background-color: #6ea3e7;
-  box-shadow: 0px 15px 20px rgba(97, 128, 175, 0.73);
+  box-shadow: 0px 15px 20px var(--btn-shadow-sec);
   transform: translateY(-2px);
 }
 
-.btn-convert:focus {
-  outline: #6ea3e7;
+.btn-convert:focus,
+.btn-convert:hover {
+  outline: var(--btn-state);
 }

@@ -1,8 +1,8 @@
-.App {
-  background: #6ea3e7;
+.app-container {
+  padding: 2rem;
 }
 
-.App-content {
+.app-content {
   margin: 0 auto;
   text-align: center;
   box-shadow: 3px 5px 45px rgb(44, 44, 44);
@@ -10,4 +10,10 @@
   max-width: 24rem;
   background: white;
   border-radius: 0.4rem;
+}
+
+.app-text {
+  font-family: inherit;
+  font-size: calc(18px + 6 * ((100vw - 320px) / 680));
+  font-weight: 500;
 }
